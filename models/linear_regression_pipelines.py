@@ -5,6 +5,15 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 
 class LinearRegressionPipelineWithPCA:
+    """
+    A pipeline with a standard scaler, PCA for dimensionality reduction, and a linear regression model. The number of PCA components can be specified when initializing the pipeline.
+    parameters:
+- n_components: The number of principal components to keep. If None, all components are kept.
+returns:
+- A pipeline object.
+throws:
+- None.
+    """
     def __init__(self, n_components=None):
         self.pipeline = Pipeline([
             ('scaler', StandardScaler()),
