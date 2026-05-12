@@ -9,11 +9,11 @@ class LinearRegressionPipelineWithPCA:
     """
     A pipeline with a standard scaler, PCA for dimensionality reduction, and a linear regression model. The number of PCA components can be specified when initializing the pipeline.
     parameters:
-- n_components: The number of principal components to keep. If None, all components are kept.
-returns:
-- A pipeline object.
-throws:
-- None.
+        - n_components: The number of principal components to keep. If None, all components are kept.
+    returns:
+        - A pipeline object.
+    throws:
+        - None.
     """
     def __init__(self, n_components=None):
         self.pipeline = Pipeline([
@@ -33,6 +33,16 @@ throws:
     
 
 class LinearRegressionPipelineWithKernelPCA:
+    """
+    A pipeline with a standard scaler, Kernel PCA for nonlinear dimensionality reduction, and a linear regression model. The number of Kernel PCA components and the kernel type can be specified when initializing the pipeline.
+    parameters:
+        - n_components: The number of principal components to keep. If None, all components are kept.
+        - kernel: The kernel type to use for the Kernel PCA. Can be 'linear', 'poly', 'rbf', 'sigmoid', or 'cosine'.
+    returns:
+        - A pipeline object.
+    throws:
+        - None.
+    """
     def __init__(self, n_components=None, kernel='rbf'):
         self.pipeline = Pipeline([
             ('scaler', StandardScaler()),
@@ -51,6 +61,15 @@ class LinearRegressionPipelineWithKernelPCA:
     
 
 class LinearRegressionPipelineWithLDA:
+    """
+    A pipeline with a standard scaler, Linear Discriminant Analysis for dimensionality reduction, and a linear regression model. The number of LDA components can be specified when initializing the pipeline.
+    parameters:
+        - n_components: The number of linear discriminants to keep. If None, all components are kept.
+    returns:
+        - A pipeline object.
+    throws:
+        - None.
+    """
     def __init__(self, n_components=None):
         self.pipeline = Pipeline([
             ('scaler', StandardScaler()),
@@ -69,6 +88,16 @@ class LinearRegressionPipelineWithLDA:
     
 
 class LinearRegressionPipelineWithPCAAndLDA:
+    """
+    A pipeline with a standard scaler, PCA for dimensionality reduction, Linear Discriminant Analysis for further dimensionality reduction, and a linear regression model. The number of PCA and LDA components can be specified when initializing the pipeline.
+    parameters:
+        - n_components_pca: The number of principal components to keep for PCA. If None, all components are kept.
+        - n_components_lda: The number of linear discriminants to keep for LDA. If None, all components are kept.
+    returns:
+        - A pipeline object.
+    throws:
+        - None.
+    """
     def __init__(self, n_components_pca=None, n_components_lda=None):
         self.pipeline = Pipeline([
             ('scaler', StandardScaler()),
@@ -88,6 +117,16 @@ class LinearRegressionPipelineWithPCAAndLDA:
 
 
 class LinearRegressionPipelineWithL1Regulation:
+    """
+    A pipeline with a standard scaler and a linear regression model with L1 regularization (Lasso). The regularization strength can be specified when initializing the pipeline.
+    parameters:
+        - alpha: The regularization strength.
+        - max_iter: The maximum number of iterations for the solver to converge.
+    returns:
+        - A pipeline object.
+    throws:
+        - None.
+    """
     def __init__(self, alpha=1.0, max_iter=1000):
         self.pipeline = Pipeline([
             ('scaler', StandardScaler()),
@@ -105,6 +144,15 @@ class LinearRegressionPipelineWithL1Regulation:
 
 
 class LinearRegressionPipelineWithPolynomialFeatures:
+    """
+    A pipeline with a standard scaler, polynomial features for capturing nonlinear relationships, and a linear regression model. The degree of the polynomial features can be specified when initializing the pipeline.
+    parameters:
+        - degree: The degree of the polynomial features.
+    returns:
+        - A pipeline object.
+    throws:
+        - None.
+    """
     def __init__(self, degree=2):
         self.pipeline = Pipeline([
             ('scaler', StandardScaler()),
