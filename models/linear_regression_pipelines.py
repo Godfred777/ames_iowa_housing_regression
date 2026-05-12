@@ -3,6 +3,7 @@ from sklearn.decomposition import PCA, KernelPCA
 from sklearn.linear_model import LinearRegression, Lasso # Import Lasso
 from sklearn.preprocessing import StandardScaler
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.preprocessing import PolynomialFeatures
 
 class LinearRegressionPipelineWithPCA:
     """
@@ -91,6 +92,24 @@ class LinearRegressionPipelineWithL1Regulation:
         self.pipeline = Pipeline([
             ('scaler', StandardScaler()),
             ('regressor', Lasso(alpha=alpha, max_iter=max_iter)) # Use Lasso for L1 regularization
+        ])
+
+    def fit(self, X, y):
+        self.pipeline.fit(X, y)
+
+    def predict(self, X):
+        return self.pipeline.predict(X)
+
+    def score(self, X, y):
+        return self.pipeline.score(X, y)
+
+
+class LinearRegressionPipelineWithPolynomialFeatures:
+    def __init__(self, degree=2):
+        self.pipeline = Pipeline([
+            ('scaler', StandardScaler()),
+            ('polynomial_features', PolynomialFeatures(degree=degree)),
+            ('regressor', LinearRegression())
         ])
 
     def fit(self, X, y):
