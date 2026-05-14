@@ -1,6 +1,6 @@
 from sklearn.pipeline import Pipeline
 from sklearn.decomposition import PCA, KernelPCA
-from sklearn.linear_model import LinearRegression, Lasso # Import Lasso
+from sklearn.linear_model import LinearRegression, Ridge, Lasso # Import Lasso
 from sklearn.preprocessing import StandardScaler
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.preprocessing import PolynomialFeatures
@@ -142,6 +142,31 @@ class LinearRegressionPipelineWithL1Regulation:
     def score(self, X, y):
         return self.pipeline.score(X, y)
 
+
+class LinearRegressionPipelineWithL2Regulation:
+    """
+    A pipeline with a standard scaler and a linear regression model with L2 regularization (Ridge). The regularization strength can be specified when initializing the pipeline.
+    parameters:
+        - alpha: The regularization strength.
+    returns:
+        - A pipeline object.
+    throws:
+        - None.
+    """
+    def __init__(self, alpha=1.0):
+        self.pipeline = Pipeline([
+            ('scaler', StandardScaler()),
+            ('regressor', Ridge(alpha=alpha)) # Use Ridge for L2 regularization
+        ])
+
+    def fit(self, X, y):
+        self.pipeline.fit(X, y)
+
+    def predict(self, X):
+        return self.pipeline.predict(X)
+
+    def score(self, X, y):
+        return self.pipeline.score(X, y)
 
 class LinearRegressionPipelineWithPolynomialFeatures:
     """
